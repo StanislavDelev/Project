@@ -1,0 +1,35 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.LayoutManager;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
+
+
+
+public class Square extends JPanel {
+    int number;
+    public String name;
+    JLabel nameLabel;
+    static int totalSquares = 0;
+
+    public String getName() {
+        return this.name;
+    }
+
+
+
+    public Square(int xCoord, int yCoord, int width, int height, String labelString) {
+        this.number = totalSquares++;
+        this.setBorder(new LineBorder(new Color(0, 0, 0)));
+        this.setBounds(xCoord, yCoord, width, height);
+        this.name = labelString;
+        this.setLayout((LayoutManager)null);
+        this.nameLabel = new JLabel(labelString);
+        this.nameLabel.setFont(new Font("Lucida Grande", 0, 15));
+        this.nameLabel.setHorizontalAlignment(0);
+        this.nameLabel.setBounds(0, 60, this.getWidth(), 30);
+        this.add(this.nameLabel);
+    }
+}
