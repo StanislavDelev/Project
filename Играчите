@@ -1,0 +1,110 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.LayoutManager;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
+
+
+
+
+public class Player extends JPanel {
+    int playerNumber;
+    JLabel lblPlayerNumber;
+    int currentSquareNumber = 0;
+    int wallet = 1000;
+    int[] xLocationsOfPlayer1 = new int[]{733, 633, 533, 433, 333, 233, 133, 33, 33, 33, 33, 133, 233, 333, 433, 533, 633, 733, 733, 733};
+    int[] yLocationsOfPlayer1 = new int[]{333, 333, 333, 333, 333, 333, 333, 333, 233, 133, 33, 33, 33, 33, 33, 33, 33, 33, 133, 233};
+    int[] xLocationsOfPlayer2 = new int[]{761, 661, 561, 461, 361, 261, 161, 61, 61, 61, 61, 161, 261, 361, 461, 561, 661, 761, 761, 761};
+    int[] yLocationsOfPlayer2 = new int[]{333, 333, 333, 333, 333, 333, 333, 333, 233, 133, 33, 33, 33, 33, 33, 33, 33, 33, 133, 233};
+
+    public int getWallet() {
+        return this.wallet;
+    }
+
+
+
+    public void withdrawFromWallet(int withdrawAmount) {
+        if (withdrawAmount > this.wallet) {
+            this.setVisible(false);
+            System.out.println("Player " + this.playerNumber + " went bankrupt!");
+        } else {
+            this.wallet -= withdrawAmount;
+        }
+
+    }
+
+
+
+
+    public void depositToWallet(int depositAmount) {
+        this.wallet += depositAmount;
+        Game.infoConsole.setText("Player  " + this.getPlayerNumber() + ". gets " + depositAmount);
+    }
+
+
+
+    public int getCurrentSquareNumber() {
+        return this.currentSquareNumber;
+    }
+
+
+
+    public int getPlayerNumber() {
+        return this.playerNumber;
+    }
+    
+    
+    
+    public Player(int xCoord, int yCoord, int width, int height) {
+        this.setBorder(new LineBorder(new Color(0, 0, 0)));
+        this.setBounds(xCoord, yCoord, 20, 20);
+        this.setLayout((LayoutManager)null);
+    }
+
+
+
+
+
+
+    public Player(int playerNumber, Color color) {
+        Color c = null;
+        this.playerNumber = playerNumber;
+        this.setBackground(color);
+        this.lblPlayerNumber = new JLabel("" + playerNumber);
+        this.lblPlayerNumber.setFont(new Font("Lucida Grande", 1, 15));
+        this.lblPlayerNumber.setForeground(Color.WHITE);
+        this.add(this.lblPlayerNumber);
+        if (color.equals(Color.RED)) {
+            this.setBounds(730, 333, 20, 28);
+        } else {
+            this.setBounds(760, 333, 20, 28);
+        }
+
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
+
+
+
+
+
+    public void move(int dicesTotal) {
+        if (Game.nowPlaying == 1 && this.currentSquareNumber + dicesTotal > 19) {
+            Game.infoConsole.setText("End of the loop");
+        }
+
+        int targetSquare = (this.currentSquareNumber + dicesTotal) % 20;
+        this.currentSquareNumber = targetSquare;
+        if (Game.nowPlaying == 0) {
+            this.setLocation(this.xLocationsOfPlayer1[targetSquare], this.yLocationsOfPlayer1[targetSquare]);
+        } else {
+            this.setLocation(this.xLocationsOfPlayer2[targetSquare], this.yLocationsOfPlayer2[targetSquare]);
+        }
+
+    }
+}
