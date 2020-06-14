@@ -1,0 +1,29 @@
+import java.util.Random;
+import javax.swing.JPanel;
+
+
+
+
+
+
+public class Dice extends JPanel {
+
+
+
+
+	Random rnd = new Random();
+	int faceValue = 0;
+	int n = 0;
+	public void rollDice(){
+		faceValue = rnd.nextInt(1) + 1;
+	}
+
+	public int getFaceValue(){
+		return faceValue;
+	}
+
+	public void rollDiceN(){
+		faceValue = rnd.nextInt(n) + 1;
+	}
+
+}
