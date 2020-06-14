@@ -1,0 +1,156 @@
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
+
+
+public class Board extends JPanel {
+
+
+
+	public static ArrayList<Square> allSquares = new ArrayList<Square>();
+	public static ArrayList<Square> partySquares = new ArrayList<Square>();
+	public static ArrayList<Square> chanceSquares = new ArrayList<Square>();
+	
+	
+	public ArrayList<Square> getAllSquares(){
+		return allSquares;
+	}
+	public ArrayList<Square> getPartySquares(){
+		return partySquares;
+	}
+	public ArrayList<Square> getChanceSquares(){
+		return chanceSquares;
+	}
+	
+	public Square getSquareAtIndex(int location) {
+		return allSquares.get(location);
+	}
+	
+  
+  
+  // Coordinates
+  
+  
+
+	public Board(int xCoord, int yCoord, int width, int height) {
+		setBorder(new LineBorder(new Color(0, 0, 0)));
+		setBounds(xCoord, yCoord, 812, 812);
+		this.setLayout(null);
+		initializeSquares();
+	}
+
+
+
+
+// Starting stuff
+
+
+	public void initializeSquares() {
+		List<String> squareNames = new ArrayList<>();
+    
+		squareNames.addAll(Arrays.asList("Trap","Trap","Trap","Trap","Trap","Trap","Trap","Invest","Invest","Invest","Chance","Chance","Chance","Steal","Steal","Steal","Party hard","Party hard","Party hard"));
+    
+		Collections.shuffle(squareNames);
+
+		Square square00 = new Square(706,306,100,100,"Start");
+		this.add(square00);
+		allSquares.add(square00);
+
+		Square square01 = new Square(606,306,100,100,squareNames.get(0));
+		this.add(square01);
+		allSquares.add(square01);
+		
+		Square square02 = new Square(506,306,100,100,squareNames.get(1));
+		this.add(square02);
+		allSquares.add(square02);
+		
+		Square square03 = new Square(406,306,100,100,squareNames.get(2));
+		this.add(square03);
+		allSquares.add(square03);
+		
+		Square square04 = new Square(306,306,100,100,squareNames.get(3));
+		this.add(square04);
+		allSquares.add(square04);
+		
+		Square square05 = new Square(206,306,100,100,squareNames.get(4));
+		this.add(square05);
+		allSquares.add(square05);
+		
+		Square square06 = new Square(106,306,100,100,squareNames.get(5));
+		this.add(square06);
+		allSquares.add(square06);
+		
+		Square square07 = new Square(6,306,100,100,squareNames.get(6));
+		this.add(square07);
+		allSquares.add(square07);
+		
+		Square square08 = new Square(6,206,100,100,squareNames.get(7));
+		this.add(square08);
+		allSquares.add(square08);
+		
+		Square square09 = new Square(6,106,100,100,squareNames.get(8));
+		this.add(square09);
+		allSquares.add(square09);
+		
+		Square square10 = new Square(6,6,100,100,squareNames.get(9));
+		this.add(square10);
+		allSquares.add(square10);
+		
+		Square square11 = new Square(106,6,100,100,squareNames.get(10));
+		this.add(square11);
+		allSquares.add(square11);
+		
+		Square square12 = new Square(206,6,100,100,squareNames.get(11));
+		this.add(square12);
+		allSquares.add(square12);
+		
+		Square square13 = new Square(306,6,100,100,squareNames.get(12));
+		this.add(square13);
+		allSquares.add(square13);
+		
+		Square square14 = new Square(406,6,100,100,squareNames.get(13));
+		this.add(square14);
+		allSquares.add(square14);
+		
+		Square square15 = new Square(506,6,100,100,squareNames.get(14));
+		this.add(square15);
+		allSquares.add(square15);
+
+		Square square16 = new Square(606,6,100,100,squareNames.get(15));
+		this.add(square16);
+		allSquares.add(square16);
+		
+		Square square17 = new Square(706,6,100,100,squareNames.get(16));
+		this.add(square17);
+		allSquares.add(square17);
+		
+		Square square18 = new Square(706,106,100,100,squareNames.get(17));
+		this.add(square18);
+		allSquares.add(square18);
+		
+		Square square19 = new Square(706,206,100,100,squareNames.get(18));
+		this.add(square19);
+		allSquares.add(square19);
+
+
+// Variable
+
+
+        for (Iterator<Square> iter = allSquares.iterator(); iter.hasNext(); ) {
+        	Square element = iter.next();
+          
+            if (element.name.toString() == "Party hard") {
+            	partySquares.add(element);
+              
+			}else if(element.name.toString() == "Chance") {
+	            	chanceSquares.add(element);
+			}
+        }
+	}
